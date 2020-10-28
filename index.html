@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="kalkulator" content="kalkulator sederhana" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Kalkulator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="kalkulator">
+      <input type="text" id="layar" />
+      <div class="container-tombol">
+        <span class="tombol operator">C</span>
+        <span class="tombol operator"><</span>
+        <span class="tombol operator">.</span>
+        <span class="tombol operator">/</span>
+        <span class="tombol">7</span>
+        <span class="tombol">8</span>
+        <span class="tombol">9</span>
+        <span class="tombol operator">*</span>
+        <span class="tombol">4</span>
+        <span class="tombol">5</span>
+        <span class="tombol">6</span>
+        <span class="tombol operator">+</span>
+        <span class="tombol">1</span>
+        <span class="tombol">2</span>
+        <span class="tombol">3</span>
+        <span class="tombol operator">-</span>
+        <span class="tombol" id="nol">0</span>
+        <span class="tombol operator" id="samadengan">=</span>
+      </div>
+    </div>
+  </body>
+  <script>
+    var tombol = document.querySelector(".container-tombol");
+    var layar = document.querySelector("#layar");
+    var resetLayar = false;
+    var bolehHitung = false;
+    var tmpVal = "";
+    var operator = "";
+
+    tombol.addEventListener("click", function (e) {
+      var tombolClick = e.target;
+      var nilaiTombol = tombolClick.innerText;
+
+      //if atau jika kita ketik tombol c maka layar kosong ("")
+      if (nilaiTombol == "C") {
+        layar.value = "";
+      } else if (nilaiTombol == "<") {
+        layar.value = layar.value.slice(0, -1);
+      } else if (nilaiTombol == "=") {
+        if (bolehHitung == true) {
+          layar.value = eval(tmpVal + operator + layar.value);
+          bolehHitung = false;
+        }
+      } else if (tombolClick.classList.contains("operator")) {
+        if (bolehHitung == true) {
+          layar.value = eval(tmpVal + operator + layar.value);
+          bolehHitung = false;
+        }
+
+        tmpVal = layar.value;
+        operator = nilaiTombol;
+        resetLayar = true;
+      } else {
+        if (resetLayar == true) {
+          layar.value = nilaiTombol;
+          resetLayar = false;
+          bolehHitung = true;
+        } else {
+          //cara menyambung variable dngan string
+          layar.value = layar.value + nilaiTombol;
+        }
+      }
+    });
+  </script>
+  <script type="text/javasript" src="kalkulator.js"></script>
+</html>

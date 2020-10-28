@@ -1,2 +1,2 @@
-# Apple-Computer
+# Membuat-kalkulator-with-JavaScript
 Created with CodeSandbox
